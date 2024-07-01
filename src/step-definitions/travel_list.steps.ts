@@ -1,8 +1,8 @@
 import { Given, Then, When } from '@cucumber/cucumber';
-import { Actor, actorInTheSpotlight } from '@serenity-js/core';
+import { Actor, Log, actorInTheSpotlight } from '@serenity-js/core';
 import { Navigate } from '@serenity-js/web';
-
 import { AddTravelItems } from '../tasks/AddTravelItems'
+
 
 /**
  * Below step definitions use Cucumber Expressions
@@ -29,9 +29,10 @@ When('{pronoun} add the quantity {string} of elemente {string} for her daily fac
  *  see: https://serenity-js.org/modules/core/function/index.html#static-function-actorCalled
  *  see: https://serenity-js.org/modules/core/function/index.html#static-function-actorInTheSpotlight
  */
-Then(/.* should see the items added/, async (expectedOutcome: string) =>
-    actorInTheSpotlight().attemptsTo(
-        // VerifyAuthentication[expectedOutcome](),
-    )
+Then(/.* should see the items added/, async () =>
+    // actorInTheSpotlight().attemptsTo(
+    //     // VerifyAuthentication[expectedOutcome](),
+    // )
+    Log.the("do nothing for now")
 );
 
