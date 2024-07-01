@@ -2,7 +2,9 @@ import { Given, Then, When } from '@cucumber/cucumber';
 import { Actor, Log, actorInTheSpotlight } from '@serenity-js/core';
 import { Navigate } from '@serenity-js/web';
 import { AddTravelItems } from '../tasks/AddTravelItems'
-
+import { Ensure, equals } from '@serenity-js/assertions';
+import { ItemPacked } from '../page-objects/ItemPacked';
+import { Text } from '@serenity-js/web'
 
 /**
  * Below step definitions use Cucumber Expressions
@@ -16,7 +18,7 @@ Given('{actor} is in the faraway land', async (actor: Actor) =>
     )
 );
 
-When('{pronoun} add the quantity {string} of elemente {string} for her daily facial care', async (actor: Actor, quantity: string, elemente: string) =>
+When('{pronoun} add the quantity {string} of {string} for her travel', async (actor: Actor, quantity: string, elemente: string) =>
     actor.attemptsTo(
         AddTravelItems.with(quantity, elemente),
     )
@@ -29,10 +31,14 @@ When('{pronoun} add the quantity {string} of elemente {string} for her daily fac
  *  see: https://serenity-js.org/modules/core/function/index.html#static-function-actorCalled
  *  see: https://serenity-js.org/modules/core/function/index.html#static-function-actorInTheSpotlight
  */
-Then(/.* should see the items added/, async () =>
-    // actorInTheSpotlight().attemptsTo(
-    //     // VerifyAuthentication[expectedOutcome](),
-    // )
-    Log.the("do nothing for now")
-);
+Then('{pronoun} should see {string} of the items {string} added', async (actor: Actor, quantity: string, item: string) =>
+    actorInTheSpotlight().attemptsTo(
+        Ensure.that(
+            Text.ofAll(ItemPacked()),
+            equals([`${quantity} ${item}`])
+          ),   
+    )
+)
+   
+   
 

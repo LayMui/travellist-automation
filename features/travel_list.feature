@@ -9,10 +9,10 @@ Feature: Travel list
 
   Scenario Outline: Add items she need for the trip
 
-    When she add the quantity "<quantity>" of elemente "<skincare>" for her daily facial care
-    Then she should see the items added
+    When she add the quantity "<quantity>" of "<item>" for her travel
+    Then she should see "<quantity>" of the items "<item>" added
 
     Examples:
-      | quantity | skincare | 
+      | quantity | item     | 
       |   2      | plus02   | 
     
